@@ -1,1 +1,17 @@
 @charset "UTF-8";
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.spacer{
+    height: 10%;
+    clear: both;
+    background-color: aqua;
+}
+.container{
+    width: 75%;
+    margin: auto;
+}

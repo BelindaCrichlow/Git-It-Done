@@ -1,6 +1,3 @@
-# Git-It-Done
-
-
 Task 4: Task Form Inputs Validation
 
 Description

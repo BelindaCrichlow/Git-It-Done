@@ -7,11 +7,14 @@
 }
 
 .spacer{
-    height: 10%;
+    height: 10vh;
     clear: both;
     background-color: aqua;
 }
 .container{
     width: 75%;
     margin: auto;
+}
+main{
+    min-height: 95vh;
 }

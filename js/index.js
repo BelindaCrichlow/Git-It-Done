@@ -1,11 +1,29 @@
-//The beginning of Get It Done
 
-//Add an ID attribute to each form field and implement the code needed to retrieve the each form field value using the following method
-//Log your field inputs to verify that you are getting the data you need to validate.
+//create the task class
+class Task {
+  constructor(taskName, taskDesc, assignedTo, dueDate){
+      this.taskName = taskName;
+      this.taskDesc = taskDesc;
+      this.assignedTo = assignedTo;
+      this.dueDate = dueDate;
+  }
+};
 
- const newTaskNameInput = document.querySelector('#newTaskNameInput');
- const name = newTaskNameInput.value;
+class UI {
+    addTaskToList(task) {
+        const taskList = document.getElementById('taskList');
+        // Create tr element
+        const listItem = document.createElement('li');
+        // Insert cols
+        listItem.innerHTML = `
+      <div>${task.taskName}</div>
+      <div>${task.taskDesc}</div>
+      <div>${task.assignedTo}</div>
+      <div>${task.dueDate}</div>
 
-const validFormFieldInput = (data) => {
-    
+      <td><a href="#" class="delete">X<a></td>
+    `;
+  
+        taskList.appendChild(listItem);
+    }
 }

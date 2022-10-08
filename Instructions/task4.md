@@ -25,12 +25,16 @@ Step 2: Implement a JavaScript function to validate your form fields
 Create a JavaScript file named index.js and include it into your index.html page.
 Implement a JavaScript function named validFormFieldInput(data)
 Add an ID attribute to each form field and implement the code needed to retrieve the each form field value using the following method:
+
  const newTaskNameInput = document.querySelector('#newTaskNameInput');
  const name = newTaskNameInput.value;
+
 Log your field inputs to verify that you are getting the data you need to validate.
  const newTaskNameInput = document.querySelector('#newTaskNameInput');
  const name = newTaskNameInput.value;
  console.log("name:  "+name);
+
+
 Useful Resources for this step
 
 Forms

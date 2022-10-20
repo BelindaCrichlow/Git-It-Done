@@ -22,12 +22,12 @@ function showSuccess(input) {
   formGroup.className = 'form-group success';
 }
 
-
+//add task to list
 form.addEventListener('submit', function(e){
 	console.log(taskName.value)
 	e.preventDefault()
 	
-	if(taskName.value === ''){
+	if(taskName.value === '' || assignedTo.value === '' || taskDesc === '' || dueDate === ''){
 		showError(taskName, 'Task name required');
 	} else {
 		showSuccess(taskName);
@@ -63,6 +63,7 @@ submitTask.addEventListener('click',function(){
 //delete task
 	listItem.addEventListener('dblclick', function(){ 		        		
     taskList.removeChild(listItem);
+    
 																 
 	});
   

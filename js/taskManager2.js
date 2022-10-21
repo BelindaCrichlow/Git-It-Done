@@ -11,12 +11,9 @@ const submitTask = document.getElementById('submitTask');
 const taskID = Math.floor(Math.random() * 10000);
  const deletAll = document.getElementById('clearAllTasks')
 
-
-
-
-
 const addTasks = (taskID, taskName, assignedTo, taskDesc, dueDate) => {
-    tasks.push({
+ 
+  tasks.push({
         taskID,
         taskName,
         assignedTo,
@@ -35,7 +32,7 @@ const addTasks = (taskID, taskName, assignedTo, taskDesc, dueDate) => {
     };
 };
 
-const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+ const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
 //remove task from list
  function deleteBook(e) {
@@ -43,12 +40,6 @@ const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
       e.target.parentElement.parentElement.remove();
     }
   }
-
-
-
-
-
-
 
 
 //remove tasks from storage
@@ -107,22 +98,12 @@ submitTask.addEventListener('click', function (e) {
     taskDesc.value = '';
     dueDate.value = '';
 
-
-   
-});
-
-//event listener to remove bood
-submitTask.addEventListener('click', function (e) {
-
-     const newTask = addTasks(taskID, taskName.value, assignedTo.value, taskDesc.value, dueDate.value);
-
     deleteTask(e.target)
 
     removeTask(e.target.parentElement.previousElementSibling.textContent);
 
   // Show message
   //ui.showAlert('Book Removed!', 'success');
-
-  e.preventDefault();
-
+   
 });
+

@@ -1,12 +1,16 @@
+//https://dev.to/desoga/club-roster-application-with-vanilla-javascript-12ci
+
+
+
 class Task {
-  constructor(taskName, assignedTo, taskDesc, dueDate, taskID) {
+  constructor(taskID, taskName, assignedTo, taskDesc, dueDate) {
+    this.taskID = taskID;
     this.taskName = taskName;
     this.assignedTo = assignedTo;
     this.taskDesc = taskDesc;
     this.dueDate = dueDate;
-    this.taskID = taskID;
-    
   }
+
   
 }
 
@@ -15,7 +19,7 @@ class UI {
     const taskList = document.getElementById('taskList');
     // Create li element
     const li = document.createElement('li');
-    li.classList.add('col-6');
+    li.classList.add('col-sm-6');
     
   //<div>${task.taskID}
     // Insert tasks
@@ -27,16 +31,22 @@ class UI {
       <hr>
       <div><strong>Owner: </strong>${task.assignedTo}</div>
       <hr>
-      <div><strong>description: </strong>${task.taskDesc}</div>
+      <div><strong>Description: </strong>${task.taskDesc}</div>
       
        <hr>
       <div><strong>Due Date: </strong>${task.dueDate}</div>
       <hr>
-      <button class="btn btn-success"><a href="#" class="delete">Delete<a></button>
-      <button class="btn btn-success"><a class="status" href="#">Pending</a></button>
+     <div><strong>Status: </strong><span class="status">Pending</span></div>
+      <hr>
+      
+      <button class="btn btn-success" id="delete"><a href="#" class="delete">Delete<a></button>
+   
     `;
   
     taskList.appendChild(li);
+
+
+
   }
 
 //alert section--form validation
@@ -60,6 +70,24 @@ class UI {
     }, 3000);
   }
 
+
+//set task status
+
+  taskStatus(dueDate) {
+    let currentDate = new Date();
+  if (dueDate.value >= currentDate) {
+    document.querySelector(".status").classList.add('.bg-info, .text-light');
+    document.querySelector(".status").innerHTML = 'Pending';
+    console.log('pending applied')
+  } else {
+    document.querySelector(".status").classList.add('bg-danger');
+    document.querySelector(".status").innerHTML = 'Status: Overdue';
+    console.log('task overdue')
+  }
+}
+
+
+
   //delete task
   deleteTask(target) {
     if(target.className === 'delete') {
@@ -70,8 +98,8 @@ class UI {
   
   
   clearFields() {
-    //task.taskID = '';
- 
+    //taskID = '';
+    document.getElementById('taskID').value = '';
     document.getElementById('taskName').value = '';
     document.getElementById('assignedTo').value = '';
     document.getElementById('taskDesc').value = '';
@@ -112,11 +140,11 @@ class Store {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }
 
-  static removeTask(taskID) {
+  static removeTask(taskName) {
     const tasks = Store.getTasks();
 
     tasks.forEach(function(task, index){
-     if(task.taskID === taskID) {
+      if (task.taskName === taskName) {
       tasks.splice(index, 1);
      }
     });
@@ -135,15 +163,16 @@ document.getElementById('task-form').addEventListener('submit', function(e){
     assignedTo = document.getElementById('assignedTo').value,
     taskDesc = document.getElementById('taskDesc').value,
     dueDate = document.getElementById('dueDate').value,
-    taskID = Math.floor(Math.random()*10000)
+  taskID= String((Math.floor(Math.random() * 10000)))
 
 
   // Instantiate task
-  const task = new Task( taskID,taskName, assignedTo, taskDesc, dueDate);
+  const task = new Task(taskID,taskName, assignedTo, taskDesc, dueDate);
 
   // Instantiate UI
   const ui = new UI();
 
+ 
   console.log(ui);
 
   // Validate
@@ -156,16 +185,23 @@ document.getElementById('task-form').addEventListener('submit', function(e){
 
     // Add to LS
     Store.addTask(task);
-
+ 
+     //Store.displayTasks()
     // Show success
     ui.showAlert('Task Added!', 'success');
-  
+    
+    //ui.taskStatus(dueDate.value);
+   
+    ui.taskStatus(task.dueDate);
     // Clear fields
     ui.clearFields();
   }
-
+  console.log(`TaskName: ${taskID} and task.taskName: ${task.taskID},`)
+  //console.log(dueDate.value);
   e.preventDefault();
 });
+
+
 
 // Event Listener for delete
 document.getElementById('taskList').addEventListener('click', function(e){
@@ -175,12 +211,15 @@ document.getElementById('taskList').addEventListener('click', function(e){
 
   // Delete task
   ui.deleteTask(e.target);
+  
 
   // Remove from LS
   Store.removeTask(e.target.parentElement.previousElementSibling.textContent);
-
+  //Store.removeTask(e.target.getElementByClassName('delete'));
+  //Store.removeTask(e.target.getAttribute(taskName))
   // Show message
   ui.showAlert('Task Removed!', 'success');
 
   e.preventDefault();
 });
+//document.getElementsByTagName

@@ -160,20 +160,3 @@ document.getElementById('taskList').addEventListener('click', function(e){
   
 })
   
-console.log(removeBook)
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-

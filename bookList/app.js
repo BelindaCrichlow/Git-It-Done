@@ -137,6 +137,7 @@ document.getElementById('book-form').addEventListener('submit', function(e){
     // Clear fields
     ui.clearFields();
   }
+  
 
   e.preventDefault();
 });
@@ -152,6 +153,7 @@ document.getElementById('book-list').addEventListener('click', function(e){
 
   // Remove from LS
   Store.removeBook(e.target.parentElement.previousElementSibling.textContent);
+  
 
   // Show message
   ui.showAlert('Book Removed!', 'success');

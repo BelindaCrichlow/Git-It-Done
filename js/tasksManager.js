@@ -82,6 +82,22 @@ class UI {
     taskDesc.value = '';
     dueDate.value = '';
   }
+  
+  taskStatus(dueDate) {
+    const currentDate = new Date();
+
+    if (dueDate.value >= currentDate) {
+      document.querySelector(".status").classList.add('.bg-info, .text-light');
+      document.querySelector(".status").innerHTML = 'Pending';
+      console.log('pending applied')
+    } else {
+      document.querySelector(".status").classList.add('bg-danger');
+      document.querySelector(".status").innerHTML = 'Status: Overdue';
+      console.log('task overdue')
+    }
+
+  }
+
 }
 
 // Local Storage Class
@@ -143,7 +159,8 @@ document.getElementById('task-form').addEventListener('click', function(e){
   const assignedTo = document.getElementById('assignedTo').value;
   const taskDesc = document.getElementById('taskDesc').value;
   const dueDate = document.getElementById('dueDate').value;
-  const taskID = Math.floor(Math.random()* 10000);
+  const taskID = String(Math.floor(Math.random() * 10000));
+        
 
   // Instantiate task
   const task = new Task(taskID,taskName, assignedTo, taskDesc, dueDate);
@@ -152,6 +169,7 @@ document.getElementById('task-form').addEventListener('click', function(e){
   const ui = new UI();
 
   console.log(ui);
+  console.log(typeof taskID)
 
   // Validate
   if(taskName === '' ||assignedTo === '' || taskDesc === ''|| dueDate === '') {
@@ -161,12 +179,16 @@ document.getElementById('task-form').addEventListener('click', function(e){
     // Add task to list
     ui.addTaskToList(task);
 
+    //
+    
+
     // Add to LS
     Store.addTask(task);
 
     // Show success
-    //ui.showAlert('Task Added!', 'success');
-  
+    ui.showAlert('Task Added!', 'success');
+
+    
     // Clear fields
     ui.clearFields();
   }
@@ -187,7 +209,8 @@ submitTask.addEventListener('click', function(e){
   Store.removeTask(e.target.parentElement.previousElementSibling.textContent);
 
   // Show message
-//ui.showAlert('Task Removed!', 'success');
-
+  ui.showAlert('Task Removed!', 'success');
+  
+ 
   e.preventDefault();
 });

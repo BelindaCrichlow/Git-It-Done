@@ -1,4 +1,4 @@
-function removeTasksFromLocalStorage(taskItem) {
+function removeTasksFromLocalStorage(taskID) {
   let tasks;
   if (localStorage.getItem('task') === null) {
     tasks = [];
@@ -29,17 +29,4 @@ const removeTask = (taskID) => {
      
 
 
-   function removeTasksFromLocalStorage(tasks) {
-  
-  if (localStorage.getItem('tasks') === null) {
-    tasks = [];
-  } else {
-    tasks = JSON.parse(localStorage.getItem('tasks'))
-  }
-  tasks.forEach((taskID, index) => {
-    if (taskID.textContent === taskID) {
-      tasks.splice(index, 1);
-    }
-  })
-   localStorage.setItem('tasks', JSON.stringify(tasks))
-}
+   

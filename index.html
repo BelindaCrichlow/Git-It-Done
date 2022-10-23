@@ -11,7 +11,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <!-- JavaScript Bundle with Popper -->
-
+<link rel="stylesheet" href="./css/atomsGen.css">
   <link href="./css/styles.css" rel="stylesheet">
 
   <title>Git It Done</title>
@@ -19,8 +19,11 @@
 
 <body>
   <main class="container">
-    <section id="new_task" class="container">
-
+    
+   
+    
+    <section id="new_task">
+<div class="spacer"></div>
       <h1 class="text-center">Git' It Done</h1>
       <div class="spacer"></div>
 
@@ -30,25 +33,26 @@
 
         <!---Form starts here--->
         
-        <form id="task-form" class="form-control-lg container">
+        <form id="task-form" class="form-control-lg">
 
+          
           <div class="form-group">
             <label for="taskName">Task Name</label>
             <input type="text" class="form-control"  id="taskName" required>
-            <small>Error message goes here</small>
+        
           </div>
 
           <div class="form-group">
             <label for="assignedTo">Assigned To:</label>
             <input type="text" class="form-control" id="assignedTo" minlength="2" maxlength="30" required>
-            <small>Error message goes here</small>
+           
           </div>
 
 
           <div class="form-group">
             <label for="taskDesc">Task Description</label>
             <textarea  type="text" class="form-control" id="taskDesc" rows="4" required></textarea>
-            <small>Error messag goes here</small>
+          
           </div>
 
           <!--<div class="form-group">
@@ -59,13 +63,13 @@
           <div class="form-group">
             <label for="dueDate">Due Date:</label>
             <input type="date" class="form-control" id="dueDate"  required>
-            <small>Error messag goes here</small>
+          
           </div>
-          <br>
+          
 
-          <div id="buttons-section" class="justify-content">
+          <div id="buttons-section">
             <button type="submit" class="btn btn-primary" id="submitTask">ADD TASK</button>
-            <button class="btn btn-primary" id="clearAllTasks">CLEAR</button>
+            
           </div>
 
         </form>
@@ -74,16 +78,16 @@
     <div class="spacer"></div>
 
     <!------Task Dispplay -->
-    <section id="task-Section" class="">
+    <section id="task-Section">
       <h2 class="text-center text-success">Tasks List</h2>
       <br>
       <ul id="taskList" class="row">
-        <li class="col-6">
+        <li class="col-sm-6">
           <div><strong>Task ID: </strong>309618</div>
           <hr>
           <div><strong>Task: </strong> Update Site Seo</div>
           <hr>
-          <div><strong>Assigned To: </strong> Belinda</div>
+          <div><strong>Assigned To: </strong> Sampler</div>
           <hr>
           <div><strong>Description: </strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit vel quod esse amet
             quasi aperiam nesciunt dolorem consectetur eaque unde inventore facilis ab in modi odio, dignissimos placeat eius
@@ -91,12 +95,12 @@
             <hr>
           <div><strong>Due Date: </strong>10 /14/2022</div>
           <hr>
-          
+          <div><strong>Status: </strong> <span class="status">Pending</span></div>
           <div>
-        
-            <div class="align-content-center">
-              <button class="btn btn-primary delete"> Delete</button>
-              <button class="btn btn-primary status"> Pending</button>
+        <hr>
+            <div class="text-center">
+              <button class="btn btn-success delete"> Delete</button>
+              
             </div>
           </div>
 
@@ -108,11 +112,14 @@
     </section>
 
 
+
   </main>
+  <canvas id="my-canvas" onclick="draw()">
+    Your browser does not support the HTML5 canvas tag
+  
+  </canvas>
 
-  <div class="spacer"></div>
-  <br>
-
+  
 
   <footer class="container text-center">
     &copy; 2022 &nbsp;&nbsp;&nbsp; Git' It Done
@@ -124,6 +131,7 @@
     integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
     crossorigin="anonymous"></script>
   <!--<script src="index.js" async></script>-->
+  <script src="./js/atomsGen.js"></script>
   <script src="./js/taskManager.js"></script>
 </body>
 

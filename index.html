@@ -24,13 +24,14 @@
       <h1 class="text-center">Git' It Done</h1>
       <div class="spacer"></div>
 
-      <div>
+      <div class="container2">
         <h4 class="text-primary">Add a new task</h4>
 
 
         <!---Form starts here--->
+        
+        <form id="task-form" class="form-control-lg container">
 
-        <form id="task-form" class=".form-control-lg">
           <div class="form-group">
             <label for="taskName">Task Name</label>
             <input type="text" class="form-control"  id="taskName" required>
@@ -38,26 +39,30 @@
           </div>
 
           <div class="form-group">
-            <label for="taskDesc">Task Description</label>
-            <textarea class="form-control" id="taskDesc" rows="4" required></textarea>
-            <small>Error messag goes here</small>
-          </div>
-
-          <div class="form-group">
             <label for="assignedTo">Assigned To:</label>
             <input type="text" class="form-control" id="assignedTo" minlength="2" maxlength="30" required>
             <small>Error message goes here</small>
-
-
           </div>
+
+
+          <div class="form-group">
+            <label for="taskDesc">Task Description</label>
+            <textarea  type="text" class="form-control" id="taskDesc" rows="4" required></textarea>
+            <small>Error messag goes here</small>
+          </div>
+
+          <!--<div class="form-group">
+          <label for="isbn">ISBN#</label>
+          <input type="text" id="isbn" class="form-control">
+          </div>-->
+          
           <div class="form-group">
             <label for="dueDate">Due Date:</label>
             <input type="date" class="form-control" id="dueDate"  required>
             <small>Error messag goes here</small>
-
-
           </div>
           <br>
+
           <div id="buttons-section" class="justify-content">
             <button type="submit" class="btn btn-primary" id="submitTask">ADD TASK</button>
             <button class="btn btn-primary" id="clearAllTasks">CLEAR</button>
@@ -74,25 +79,34 @@
       <br>
       <ul id="taskList" class="row">
         <li class="col-6">
-          Task: Update Site Seo<br>
-          Assigned To: Belinda
-          Task Description:<br> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis molestias sapiente
-          delectus,
-          Due Date: 10/14/2022
-          Status: Pending
+          <div><strong>Task ID: </strong>309618</div>
+          <hr>
+          <div><strong>Task: </strong> Update Site Seo</div>
+          <hr>
+          <div><strong>Assigned To: </strong> Belinda</div>
+          <hr>
+          <div><strong>Description: </strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit vel quod esse amet
+            quasi aperiam nesciunt dolorem consectetur eaque unde inventore facilis ab in modi odio, dignissimos placeat eius
+            consequatur? </div>
+            <hr>
+          <div><strong>Due Date: </strong>10 /14/2022</div>
+          <hr>
+          
+          <div>
+        
+            <div class="align-content-center">
+              <button class="btn btn-primary delete"> Delete</button>
+              <button class="btn btn-primary status"> Pending</button>
+            </div>
+          </div>
+
         </li>
-        <li class="col-6">
-          Task: Update Site Seo<br>
-          Assigned To: Belinda
-          Task Description:<br> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis molestias sapiente
-          delectus,
-          Due Date: 10/14/2022
-          Status: Pending
-        </li>
+        
       </ul>
 
 
     </section>
+
 
   </main>
 
@@ -110,7 +124,7 @@
     integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
     crossorigin="anonymous"></script>
   <!--<script src="index.js" async></script>-->
-  <script src="js/taskManager2.js"></script>
+  <script src="./js/taskManager.js"></script>
 </body>
 
 </html>

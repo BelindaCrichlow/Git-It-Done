@@ -53,6 +53,7 @@ submitTask.addEventListener('click',function(){
   taskDesc.value = '';
   dueDate.value = '';
 
+
   /*
 	///add a line throuh the test
 	listItem.addEventListener('click', function(){ 		        		
@@ -61,10 +62,9 @@ submitTask.addEventListener('click',function(){
 	});*/
 	
 //delete task
-	listItem.addEventListener('dblclick', function(){ 		        		
-    taskList.removeChild(listItem);
-    
-																 
+	taskList.addEventListener('dblclick', function(){ 		        		
+    taskList.removeChild(li);
+														 
 	});
   
   

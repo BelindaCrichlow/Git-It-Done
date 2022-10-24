@@ -10,8 +10,6 @@ class Task {
     this.taskDesc = taskDesc;
     this.dueDate = dueDate;
   }
-
-  
 }
 
 class UI {
@@ -49,6 +47,13 @@ class UI {
 
   }
 
+   //delete task
+  deleteTask(target) {
+    if(target.className === 'delete') {
+      target.parentElement.parentElement.remove();
+      
+    }
+  }
 //alert section--form validation
   showAlert(message, className) {
     // Create div
@@ -73,7 +78,7 @@ class UI {
 
 //set task status
 
-  taskStatus(dueDate) {
+  /*taskStatus(dueDate) {
     let currentDate = new Date();
   if (dueDate.value >= currentDate) {
     document.querySelector(".status").classList.add('.bg-info, .text-light');
@@ -84,22 +89,17 @@ class UI {
     document.querySelector(".status").innerHTML = 'Status: Overdue';
     console.log('task overdue')
   }
-}
+}*/
 
 
 
-  //delete task
-  deleteTask(target) {
-    if(target.className === 'delete') {
-      target.parentElement.parentElement.remove();
-    }
-  }
+ 
 
   
   
   clearFields() {
     //taskID = '';
-    document.getElementById('taskID').value = '';
+   document.getElementById('taskID').value = '';
     document.getElementById('taskName').value = '';
     document.getElementById('assignedTo').value = '';
     document.getElementById('taskDesc').value = '';
@@ -140,15 +140,18 @@ class Store {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }
 
-  static removeTask(taskName) {
+  static removeTask(taskID) {
     const tasks = Store.getTasks();
 
-    tasks.forEach(function(task, index){
-      if (task.taskName === taskName) {
+    tasks.forEach(function (task, index) {
+      console.log(index)
+      console.log('task: ', task)
+        console.log(`TaskID ${taskID} and task.taskID: ${task.taskID},`)
+      if (task.taskID === taskID) {
       tasks.splice(index, 1);
      }
     });
-
+    console.log(tasks);
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }
 }
@@ -163,11 +166,18 @@ document.getElementById('task-form').addEventListener('submit', function(e){
     assignedTo = document.getElementById('assignedTo').value,
     taskDesc = document.getElementById('taskDesc').value,
     dueDate = document.getElementById('dueDate').value,
-  taskID= String((Math.floor(Math.random() * 10000)))
+    taskID = document.getElementById('taskID').value
+  
+  /*const setTaskIDValue = () => {
+    var num = Math.floor((Math.random() * 10000))
+    document.getElementById('taskID').value(num);
+  }
+    
+  //setTaskIDValue();>*/
 
 
   // Instantiate task
-  const task = new Task(taskID,taskName, assignedTo, taskDesc, dueDate);
+  const task = new Task(taskID, taskName, assignedTo, taskDesc, dueDate);
 
   // Instantiate UI
   const ui = new UI();
@@ -176,7 +186,7 @@ document.getElementById('task-form').addEventListener('submit', function(e){
   console.log(ui);
 
   // Validate
-  if(taskName === '' || assignedTo === '' || taskDesc === '' || dueDate === '') {
+  if(taskName === '' || assignedTo === '' || taskDesc === '' || dueDate === '' || taskID === '') {
     // Error alert
     showAlert('Please fill in all fields', 'error');
   } else {
@@ -185,18 +195,18 @@ document.getElementById('task-form').addEventListener('submit', function(e){
 
     // Add to LS
     Store.addTask(task);
- 
+   console.log(`TaskID ${taskID} and task.taskID: ${task.taskID},`)
      //Store.displayTasks()
     // Show success
     ui.showAlert('Task Added!', 'success');
     
     //ui.taskStatus(dueDate.value);
    
-    ui.taskStatus(task.dueDate);
+    //ui.taskStatus(task.dueDate);
     // Clear fields
     ui.clearFields();
   }
-  console.log(`TaskName: ${taskID} and task.taskName: ${task.taskID},`)
+
   //console.log(dueDate.value);
   e.preventDefault();
 });
@@ -212,14 +222,11 @@ document.getElementById('taskList').addEventListener('click', function(e){
   // Delete task
   ui.deleteTask(e.target);
   
-
+  console.log('weird code:', e.target.parentElement.previousElementSibling)
   // Remove from LS
   Store.removeTask(e.target.parentElement.previousElementSibling.textContent);
-  //Store.removeTask(e.target.getElementByClassName('delete'));
-  //Store.removeTask(e.target.getAttribute(taskName))
-  // Show message
+  
   ui.showAlert('Task Removed!', 'success');
 
   e.preventDefault();
 });
-//document.getElementsByTagName

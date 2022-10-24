@@ -28,16 +28,17 @@
       <div class="spacer"></div>
 
       <div class="container2">
-        <h4 class="text-primary">Add a new task</h4>
+      
 
 
         <!---Form starts here--->
         
         <form id="task-form" class="form-control-lg">
-
+          <h4 class="text-primary">Add a new task</h4>
+          <hr>
           <div class="form-group">
             <label for="taskID">Task ID</label>
-            <input type="number" class="form-control" 
+            <input type="text" class="form-control" 
             id="taskID" value="" required>
 
           <div class="form-group">
@@ -83,32 +84,12 @@
 
     <!------Task Dispplay -->
     <section id="task-Section">
-      <h2 class="text-center text-success">Tasks List</h2>
-      <br>
+    <h2 class="text-center text-success">Tasks List</h2>
       <ul id="taskList" class="row">
-        <li class="col-sm-6">
-          <div><strong>Task ID: </strong>309618</div>
-          <hr>
-          <div><strong>Task: </strong> Update Site Seo</div>
-          <hr>
-          <div><strong>Assigned To: </strong> Sampler</div>
-          <hr>
-          <div><strong>Description: </strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit vel quod esse amet
-            quasi aperiam nesciunt dolorem consectetur eaque unde inventore facilis ab in modi odio, dignissimos placeat eius
-            consequatur? </div>
-            <hr>
-          <div><strong>Due Date: </strong>10 /14/2022</div>
-          <hr>
-          <div><strong>Status: </strong> <span class="status">Pending</span></div>
-          <div>
+        
         <hr>
-            <div class="text-center">
-              <button class="btn btn-success delete"> Delete</button>
-              
-            </div>
-          </div>
-
-        </li>
+        <br>
+        
         
       </ul>
 
@@ -120,11 +101,9 @@
   </main>
   <canvas id="my-canvas" onclick="draw()">
     Your browser does not support the HTML5 canvas tag
-  
   </canvas>
 
   
-
   <footer class="text-center">
     &copy; 2022 &nbsp;&nbsp;&nbsp; Git' It Done
   </footer>

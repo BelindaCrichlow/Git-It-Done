@@ -23,8 +23,7 @@ class UI {
     // Insert tasks
     li.innerHTML = `
       
-    <div><strong>Task ID:</strong> ${task.taskID}</div>
-      <hr>
+  
       <div><strong>Task: </strong>${task.taskName}</div>
       <hr>
       <div><strong>Owner: </strong>${task.assignedTo}</div>
@@ -36,7 +35,10 @@ class UI {
       <hr>
      <div><strong>Status: </strong><span class="status">Pending</span></div>
       <hr>
-      
+      <span><strong>Task ID: </strong></span>
+      <hr>
+        <div>${task.taskID}</div>
+  
       <button class="btn btn-success" id="delete"><a href="#" class="delete">Delete<a></button>
    
     `;
@@ -145,7 +147,7 @@ class Store {
 
     tasks.forEach(function (task, index) {
       console.log(index)
-      console.log('task: ', task)
+      
         console.log(`TaskID ${taskID} and task.taskID: ${task.taskID},`)
       if (task.taskID === taskID) {
       tasks.splice(index, 1);
@@ -221,8 +223,10 @@ document.getElementById('taskList').addEventListener('click', function(e){
 
   // Delete task
   ui.deleteTask(e.target);
+
+  //console.log(`TaskID ${taskID} and task.taskID: ${task.taskID},`)
   
-  console.log('weird code:', e.target.parentElement.previousElementSibling)
+  //console.log('weird code:', e.target.parentElement.previousElementSibling.parentElement.textContent)
   // Remove from LS
   Store.removeTask(e.target.parentElement.previousElementSibling.textContent);
   

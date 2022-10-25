@@ -151,6 +151,8 @@ document.getElementById('book-list').addEventListener('click', function(e){
   // Delete book
   ui.deleteBook(e.target);
 
+console.log(console.log(`isbn: ${isbn} and book.isbn: ${book.isbn},`))
+	
   // Remove from LS
   Store.removeBook(e.target.parentElement.previousElementSibling.textContent);
   

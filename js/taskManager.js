@@ -23,7 +23,8 @@ class UI {
     // Insert tasks
     li.innerHTML = `
       
-      <div><strong></strong>${task.taskID}</div>
+      <div><strong>Task ID: </strong>${task.taskID}</div>
+      <hr>
       <div><strong>Task: </strong>${task.taskName}</div>
       <hr>
       <div><strong>Owner: </strong>${task.assignedTo}</div>
@@ -33,7 +34,7 @@ class UI {
       <span><strong>Due Date:</strong><span>
       <span>${task.dueDate}</span>
       <hr>
-     <div><strong>Status:</strong><span class="status">Pending</span></div>
+     <div><strong>Status: </strong><span class="status">Pending</span></div>
       <hr>
       <button class="btn btn-success"><a href="#" class="delete">Delete<a></button>
    

@@ -23,39 +23,40 @@ class UI {
     // Insert tasks
     li.innerHTML = `
       
-  
+      <div><strong></strong>${task.taskID}</div>
       <div><strong>Task: </strong>${task.taskName}</div>
       <hr>
       <div><strong>Owner: </strong>${task.assignedTo}</div>
       <hr>
       <div><strong>Description: </strong>${task.taskDesc}</div>
-      
        <hr>
-      <div><strong>Due Date: </strong>${task.dueDate}</div>
+      <span><strong>Due Date:</strong><span>
+      <span>${task.dueDate}</span>
       <hr>
-     <div><strong>Status: </strong><span class="status">Pending</span></div>
+     <div><strong>Status:</strong><span class="status">Pending</span></div>
       <hr>
-      <span><strong>Task ID: </strong></span>
-      <hr>
-        <div>${task.taskID}</div>
-  
-      <button class="btn btn-success" id="delete"><a href="#" class="delete">Delete<a></button>
+      <button class="btn btn-success"><a href="#" class="delete">Delete<a></button>
    
     `;
   
     taskList.appendChild(li);
+    
+//tasks.style.display = tasks.style.length === 0 ? "none" : "flex";
 
-
+//<button class="btn btn-success" id="delete"><a href="#" class="delete">Delete<a></button>
 
   }
 
    //delete task
   deleteTask(target) {
     if(target.className === 'delete') {
-      target.parentElement.parentElement.remove();
+      target.parentElement.parentElement.parentElement.parentElement.remove();
+      console.log(target.parentElement.parentElement.parentElement);
       
     }
   }
+  
+
 //alert section--form validation
   showAlert(message, className) {
     // Create div
@@ -77,31 +78,10 @@ class UI {
     }, 3000);
   }
 
-
-//set task status
-
-  /*taskStatus(dueDate) {
-    let currentDate = new Date();
-  if (dueDate.value >= currentDate) {
-    document.querySelector(".status").classList.add('.bg-info, .text-light');
-    document.querySelector(".status").innerHTML = 'Pending';
-    console.log('pending applied')
-  } else {
-    document.querySelector(".status").classList.add('bg-danger');
-    document.querySelector(".status").innerHTML = 'Status: Overdue';
-    console.log('task overdue')
-  }
-}*/
-
-
-
- 
-
-  
   
   clearFields() {
     //taskID = '';
-   document.getElementById('taskID').value = '';
+   
     document.getElementById('taskName').value = '';
     document.getElementById('assignedTo').value = '';
     document.getElementById('taskDesc').value = '';
@@ -139,23 +119,42 @@ class Store {
 
     tasks.push(task);
 
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  }
 
-  static removeTask(taskID) {
+    
+    
+    //set task status
+    let currentDate = new Date();
+    let storageDate = JSON.parse(localStorage.getItem('dueDate'));
+  if(localStorage.getItem('dueDate') > currentDate) {
+    document.querySelector(".status").classList.add('.bg-info, .text-light');
+    document.querySelector(".status").innerHTML = 'Pending';
+    console.log('pending applied')
+  } else {
+    document.querySelector(".status").classList.add('bg-danger');
+    document.querySelector(".status").innerHTML = 'Status: Overdue';
+    console.log('task overdue')
+    }
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+    
+
+  static removeTask( dueDate) {
     const tasks = Store.getTasks();
 
     tasks.forEach(function (task, index) {
       console.log(index)
       
-        console.log(`TaskID ${taskID} and task.taskID: ${task.taskID},`)
-      if (task.taskID === taskID) {
+       
+      if (task.dueDate === dueDate) {
       tasks.splice(index, 1);
-     }
+      }
+      
     });
-    console.log(tasks);
+    
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }
+  
 }
 
 // DOM Load Event
@@ -168,14 +167,10 @@ document.getElementById('task-form').addEventListener('submit', function(e){
     assignedTo = document.getElementById('assignedTo').value,
     taskDesc = document.getElementById('taskDesc').value,
     dueDate = document.getElementById('dueDate').value,
-    taskID = document.getElementById('taskID').value
+    taskID =  Math.floor((Math.random() * 10000))
+
   
-  /*const setTaskIDValue = () => {
-    var num = Math.floor((Math.random() * 10000))
-    document.getElementById('taskID').value(num);
-  }
-    
-  //setTaskIDValue();>*/
+  
 
 
   // Instantiate task
@@ -223,12 +218,15 @@ document.getElementById('taskList').addEventListener('click', function(e){
 
   // Delete task
   ui.deleteTask(e.target);
+  console.log(e.target);
 
   //console.log(`TaskID ${taskID} and task.taskID: ${task.taskID},`)
   
   //console.log('weird code:', e.target.parentElement.previousElementSibling.parentElement.textContent)
   // Remove from LS
-  Store.removeTask(e.target.parentElement.previousElementSibling.textContent);
+  Store.removeTask(e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent);
+  
+  
   
   ui.showAlert('Task Removed!', 'success');
 

@@ -137,7 +137,8 @@ button{
 
 footer{
     height: 10vh;
-    
+    padding-top: 2%;
+    padding-bottom: 2%;
     color:#f0f0f0;
     width:100%;
     

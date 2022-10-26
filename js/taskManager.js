@@ -32,10 +32,9 @@ class UI {
       <div><strong>Description: </strong>${task.taskDesc}</div>
        <hr>
       <span><strong>Due Date:</strong><span>
-      <span>${task.dueDate}</span>
+      <span class="status">${task.dueDate}</span>
       <hr>
-     <div><strong>Status: </strong><span class="status">Pending</span></div>
-      <hr>
+     
       <button class="btn btn-success"><a href="#" class="delete">Delete<a></button>
    
     `;
@@ -95,7 +94,7 @@ class UI {
 class Store {
   static getTasks() {
     let tasks;
-    if(localStorage.getItem('tasks') === null) {
+    if (localStorage.getItem('tasks') === null) {
       tasks = [];
     } else {
       tasks = JSON.parse(localStorage.getItem('tasks'));
@@ -107,8 +106,8 @@ class Store {
   static displayTasks() {
     const tasks = Store.getTasks();
 
-    tasks.forEach(function(task){
-      const ui  = new UI;
+    tasks.forEach(function (task) {
+      const ui = new UI;
 
       // Add task to UI
       ui.addTaskToList(task);
@@ -121,32 +120,38 @@ class Store {
     tasks.push(task);
 
 
-    
-    
-    //set task status
-    let currentDate = new Date();
-    let storageDate = JSON.parse(localStorage.getItem('dueDate'));
-  if(localStorage.getItem('dueDate') > currentDate) {
-    document.querySelector(".status").classList.add('.bg-info, .text-light');
-    document.querySelector(".status").innerHTML = 'Pending';
-    console.log('pending applied')
-  } else {
-    document.querySelector(".status").classList.add('bg-danger');
-    document.querySelector(".status").innerHTML = 'Status: Overdue';
-    console.log('task overdue')
-    }
 
     localStorage.setItem('tasks', JSON.stringify(tasks));
-}
+  }
     
+
+    ///////////////////////////////////////////////////////////
+  
+    //set task status
+   static setTaskStatus() {
+    let currentDate = new Date();
+    const tasks = Store.getTasks();
+
+    tasks.forEach(function (index) {
+      if (localStorage.getItem('dueDate') > currentDate) {
+        tasks.indexOf('dueDate');
+
+      }
+      
+    });
+    
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }
+  
+   /////////////////////////////////////////////////////
+
 
   static removeTask( dueDate) {
     const tasks = Store.getTasks();
 
     tasks.forEach(function (task, index) {
-      console.log(index)
       
-       
+    
       if (task.dueDate === dueDate) {
       tasks.splice(index, 1);
       }
@@ -188,19 +193,21 @@ document.getElementById('task-form').addEventListener('submit', function(e){
     // Error alert
     showAlert('Please fill in all fields', 'error');
   } else {
+
     // Add task to list
    ui.addTaskToList(task);
 
+    
     // Add to LS
     Store.addTask(task);
    console.log(`TaskID ${taskID} and task.taskID: ${task.taskID},`)
-     //Store.displayTasks()
-    // Show success
+
+    
+    
+     // Show success
     ui.showAlert('Task Added!', 'success');
     
-    //ui.taskStatus(dueDate.value);
    
-    //ui.taskStatus(task.dueDate);
     // Clear fields
     ui.clearFields();
   }
@@ -221,11 +228,9 @@ document.getElementById('taskList').addEventListener('click', function(e){
   ui.deleteTask(e.target);
   console.log(e.target);
 
-  //console.log(`TaskID ${taskID} and task.taskID: ${task.taskID},`)
   
-  //console.log('weird code:', e.target.parentElement.previousElementSibling.parentElement.textContent)
   // Remove from LS
-  Store.removeTask(e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent);
+  Store.removeTask(e.target.parentElement.previousElementSibling.previousElementSibling.textContent);
   
   
   
